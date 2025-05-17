@@ -1,0 +1,12 @@
+source 'https://rubygems.org'
+
+gem 'bigdecimal', '~> 3.0'
+gem 'sinatra'
+gem 'sinatra-contrib'
+gem 'pg'           # para conectarse a PostgreSQL
+gem 'jwt'          # para decodificar tokens Firebase
+gem 'activerecord', '~> 7.0'
+gem 'sinatra-activerecord', '~> 2.0'
+gem "rackup", "~> 2.2"
+gem 'webrick'      # para iniciar el servidor
+gem 'rake' 
