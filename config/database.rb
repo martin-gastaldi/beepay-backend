@@ -1,26 +1,13 @@
-development:
-  adapter: postgresql
-  encoding: unicode
-  database: beepay_development
-  pool: 5
-  username: martin
-  password:
-  host: localhost
+require 'active_record'
+require 'yaml'
+require 'erb'
 
-test:
-  adapter: postgresql
-  encoding: unicode
-  database: beepay_test
-  pool: 5
-  username: martin
-  password:
-  host: localhost
+# Cargar archivo YAML
+db_config_path = File.expand_path('../database.yml', __FILE__)
+db_config = YAML.load(ERB.new(File.read(db_config_path)).result)
 
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: beepay_production
-  pool: 5
-  username: martin
-  password:
-  host: localhost
+# Detectar entorno actual
+env = ENV['RACK_ENV'] || 'development'
+
+# Establecer conexión
+ActiveRecord::Base.establish_connection(db_config[env])

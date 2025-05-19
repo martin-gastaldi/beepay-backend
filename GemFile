@@ -1,12 +1,33 @@
-source 'https://rubygems.org'
+# Esta línea indica la versión de Ruby.
+ruby '3.2.2'
 
-gem 'bigdecimal', '~> 3.0'
-gem 'sinatra'
+# Esta línea es fundamental en cualquier Gemfile.
+# Indica el origen de donde Bundler (la herramienta que lee y procesa el Gemfile).
+source "https://rubygems.org"
+
+# Sinatra es un framework ligero para construir aplicaciones web en Ruby.
+# '~> 4.1' indica que se usará la versión 4.1.x.
+gem 'sinatra', '~> 4.1'
+
+# `rackup` es una herramienta de línea de comandos incluida en la gema `rack`.
+# Se usa para iniciar servidores web compatibles con Rack, como el servidor de Sinatra.
+# Al incluir esta gema, aseguramos que el comando `rackup` esté disponible para ejecutar el archivo `config.ru`.
+gem 'rackup'
 gem 'sinatra-contrib'
-gem 'pg'           # para conectarse a PostgreSQL
-gem 'jwt'          # para decodificar tokens Firebase
-gem 'activerecord', '~> 7.0'
-gem 'sinatra-activerecord', '~> 2.0'
-gem "rackup", "~> 2.2"
-gem 'webrick'      # para iniciar el servidor
-gem 'rake' 
+
+# Puma es un servidor web concurrente y de alto rendimiento para aplicaciones Ruby/Rack.
+# Es comúnmente usado con Sinatra por su velocidad y capacidad para manejar múltiples solicitudes simultáneamente.
+gem 'puma', '~> 6.6'
+
+# Integra ActiveRecord (un ORM de Ruby) con Sinatra.
+# Permite usar modelos y manejar bases de datos relacionales fácilmente
+gem 'sinatra-activerecord'
+
+# Proporciona una interfaz para usar SQLite, una base de datos ligera y sin servidor.
+# Es ideal para desarrollo o aplicaciones pequeñas, ya que almacena datos en un solo archivo.
+gem 'sqlite3'
+
+# Herramienta para gestionar migraciones de base de datos y crear esquemas.
+# (ej. `rake db:migrate`).
+gem 'rake'
+
