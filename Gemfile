@@ -30,3 +30,5 @@ gem 'sqlite3'
 
 # Gema: Rake (automatizar tareas en Ruby. Se usa para ejecutar tareas de base de datos, como migraciones con ActiveRecord).
 gem 'rake'
+
+gem 'bcrypt', '~> 3.1.7' # Para el manejo de contraseñas seguras.
