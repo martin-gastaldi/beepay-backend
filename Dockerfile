@@ -20,6 +20,7 @@ RUN bundle install
 
 # Copiar todo el contenido del proyecto al directorio /app.
 COPY . .
+COPY public/ /app/public/
 
 # Puerto para acceso externo.
 EXPOSE 8000
