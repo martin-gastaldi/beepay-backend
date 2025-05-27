@@ -1,0 +1,88 @@
+/* public/css/style.css */
+
+:root{
+   
+    --primary-color: #ffcf00;
+    --background-color: #121212;
+    --text-color: #f5f5f5;
+}
+
+body {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+
+
+header {
+  background-color: #1f1f1f;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid #333;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.5em;
+  color: var(--primary-color);
+  font-family: "Anton", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+h2 {
+  text-align: center; 
+  font-size: 1.5em;
+  color: var(--text-color);
+}
+
+nav a {
+  color: #f5f5f5;
+  text-decoration: none;
+  margin: 0 10px;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+form {
+  background-color: #1f1f1f;
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #00000066;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 4px;
+  background-color: #2a2a2a;
+  color: white;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: #fffb00;
+  color: black;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #00a3cc;
+}
