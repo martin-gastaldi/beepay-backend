@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Sinatra App</title>
+  <title>BeePay</title>
   <link rel="stylesheet" href="/css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -9,14 +9,6 @@
 </head>
 
 <body>
-  <header>
-    <h1>BeePay</h1>
-    <nav>
-      <a href="/signup">Registrarse</a> |
-      <a href="/login">Iniciar Sesion</a>
-    </nav>
-    <hr>
-  </header>
 
   <% if @error %>
     <p style="color: red;"><%= @error %></p>

@@ -1,12 +1,22 @@
 <div class="container">
-  <h2>Ingresa Tus Datos</h2>
-  <form action="/login" method="post">
-    <label>Email:</label>
-    <input type="email" name="email" required>
-
-    <label>Contraseña:</label>
-    <input type="password" name="password" required>
-
-    <button type="submit">Ingresar</button>
-  </form>
+  <div class="left">
+     <img src="/images/logo.png" alt="Logo de BeePay" class="logo">
+    <p class="slogan">Donde tu plata vuela segura.</p>
+  </div>
+  
+  <div class="right">
+    <form class="login-form">
+      <input type="email" placeholder="Email">
+      <input type="password" placeholder="Contraseña">
+      <button type="submit">Iniciar sesión</button>
+      <div class="links">
+        <div class="password-perdida">
+          <a href="/password-perdida-link">¿Olvidaste tu contraseña?</a>
+        </div>
+        <p class="texto"> ¿No tienes cuenta?</p>
+        <a href="/signup">Registrarse</a>
+      </div>
+      
+    </form>
+  </div>
 </div>
