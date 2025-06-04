@@ -1,5 +1,4 @@
 # Versión de Ruby.
-#ruby '3.2.2'
 ruby '~> 3.2'
 
 # Origen de Bundler para leer y procesar el Gemfile.
@@ -31,4 +30,11 @@ gem 'sqlite3'
 # Gema: Rake (automatizar tareas en Ruby. Se usa para ejecutar tareas de base de datos, como migraciones con ActiveRecord).
 gem 'rake'
 
-gem 'bcrypt', '~> 3.1.7' # Para el manejo de contraseñas seguras.
+# Gema: Bcrypt (manejo seguro de contraseñas).
+gem 'bcrypt', '~> 3.1.7'
+
+# Gemas : Rspec y Rack-Test (automatización de tests).
+group :test, :development do
+  gem 'rspec'
+  gem 'rack-test'
+end
