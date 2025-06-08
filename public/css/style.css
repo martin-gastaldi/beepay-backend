@@ -1,6 +1,7 @@
 /* public/css/style.css */
 :root{
   --primary-color: #ffcf00;
+  --primary-font: "Oswald", sans-serif;
 }
 
 body {
@@ -9,6 +10,11 @@ body {
   background-color: #000000; /* por si no carga */
   margin: 0;
   padding: 0;
+}
+
+.texto_bienvenida{
+  color:#ffcf00;
+  font-family: var(--primary-font);
 }
 
 .container {
@@ -34,7 +40,7 @@ body {
   padding: 2rem;
 }
 
-.logo {
+.logo_login {
   width: 700px;
   height: auto;
 }
@@ -66,7 +72,7 @@ body {
   font-size: 1rem;
 }
 
-.login-form button {
+.login-form button , .signup-form button {
   background-color: var(--primary-color);
   color: rgb(0, 0, 0);
   padding: 12px;
@@ -78,7 +84,7 @@ body {
   transition: background-color 0.3s ease;
 }
 
-.login-form button:hover {
+.login-form button:hover , .signup-form button:hover {
   background-color: #665719;
   
 }
@@ -105,4 +111,227 @@ body {
   text-align: center;
   margin-top: 20px;
   margin-bottom: 5px;
+}
+
+label{
+  color: #ffffff;
+  font-family: var(--primary-font);
+  font-weight: bold;
+  padding-bottom: 2px;
+}
+
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+
+.signup-form input {
+  padding: 15px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+ 
+}
+
+.logo-header{
+  width: 300px;
+  height: auto;
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.slogan-header {
+  text-align: center;
+  font-size: 10px;
+  color: #c5c5c5;
+  text-shadow: 0 0 10px rgb(0, 0, 0), 0 0 20px rgb(19, 19, 19);
+  text-transform: uppercase;
+  margin-top: 0.5px;
+  margin-right: 1.5rem;
+}
+
+.texto-header {
+  color: wheat;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  text-align: left;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.texto-inicio{
+  color: var(--primary-color);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.registro{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  
+}
+
+/*  vista welcome*/
+
+header {
+  background-color: #ffe600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  font-family: var(--primary-font);
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.main-container {
+  display: flex;
+  min-height: calc(100vh - 60px);
+  background-color: #000000;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #3f3f3f;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.sidebar button {
+  padding: 10px;
+  font-size: 1em;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
+.card-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 480px;
+  box-sizing: border-box;
+}
+
+.card h3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1em;
+}
+
+.cvu-link {
+  font-size: 0.85em;
+  background-color: #eef3ff;
+  padding: 4px 8px;
+  border-radius: 6px;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.balance {
+  font-size: 1.8em;
+  margin: 10px 0;
+}
+
+.eye-icon {
+  margin-left: 10px;
+  font-size: 0.8em;
+  cursor: pointer;
+}
+
+.to-settle,
+.total-earned {
+  color: #555;
+  margin: 8px 0;
+}
+
+.badge {
+  background-color: #e3f5ff;
+  color:var(--primary-color);
+  font-size: 0.8em;
+  padding: 2px 6px;
+  border-radius: 10px;
+  margin-left: 6px;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.primary {
+  flex: 1;
+  padding: 10px;
+  background-color: #dbe9ff;
+  color: var(--primary-color);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.error-message {
+  text-align: center;
+  color: red;
+  margin: 20px 0;
+}
+
+.retry {
+  display: block;
+  color: var(--primary-color);
+  text-decoration: none;
+  margin-top: 5px;
+}
+
+.view-all {
+  display: block;
+  text-align: right;
+  margin-top: 15px;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: bold;
 }

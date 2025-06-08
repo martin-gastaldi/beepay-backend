@@ -69,9 +69,9 @@ class App < Sinatra::Application
     # Ruta para manejar el envío del formulario de registro.
     post '/signup' do
     user = User.new(
-        user_name: params[:name],
+        user_name: params[:user_name], 
         email: params[:email],
-        password: params[:password]
+        password: params[:password], 
     )
     # Aquí se crea un nuevo usuario con los parámetros del formulario.
     if user.save
@@ -90,7 +90,9 @@ class App < Sinatra::Application
     end
     # Ruta para manejar el envío del formulario de inicio de sesión.
     post '/login' do
+        
     user = User.find_by(email: params[:email])  # Busca al usuario por su correo electrónico.
+
     if user && user.authenticate(params[:password]) # Verifica si el usuario existe y si la contraseña es correcta.
         session[:user_id] = user.id # Si la autenticación es exitosa, guarda el ID del usuario en la sesión.
         redirect '/welcome' # Redirige al usuario a la página de bienvenida (o panel de control).

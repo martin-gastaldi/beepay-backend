@@ -1,16 +1,24 @@
 
-<div class= containter>
-<h2>Sign Up</h2>
-<form action="/signup" method="post">
-  <label>Name:</label><br>
-  <input type="text" name="name" required><br>
+<header>
+  <img src="/images/logo.png" alt="Logo" class="logo-header">
+  
+  <h1 class="slogan-header">Donde tu plata vuela segura.</h1>
+  <p class="texto-header">¿Ya tienes cuenta? <a class="texto-inicio" href="/login">Iniciar sesión</a></p>
+</header>
 
-  <label>Email:</label><br>
-  <input type="email" name="email" required><br>
+<div class="registro">
+ <form action="/signup" method="post" class="signup-form">
+    <label>Nombre:</label><br>
+    <input type="text" name="user_name" required placeholder="Ingresa tu nombre de usuario"><br>
 
-  <label>Password:</label><br>
-  <input type="password" name="password" required><br><br>
+    <label>Email:</label><br>
+    <input type="email" name="email" required placeholder="Ingresa un email valido"><br>
 
-  <button type="submit">Sign Up</button>
-</form>
+    <label>Contraseña:</label><br>
+    <input type="password" name="password" required placeholder="Minimo 8 caracteres"><br><br>
+
+    <button type="submit">Registrarme</button>
+  </form>
+</div>
+
 </div>

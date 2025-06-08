@@ -1,4 +1,54 @@
-# esto es para mostrar un mensaje de bienvenida al usuario después de iniciar sesión
-<h2>Welcome , <%= @user.name %>!</h2>
-<p>You are now logged in.</p>
+<head>
+  <meta charset="UTF-8">
+  <title>BeePay - Bienvenido</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <div class="logo">BeePay</div>
+    <nav>
+      <ul>
+        <li><a href="/perfil">Perfil</a></li>
+        <li><a href="/logout">Salir</a></li>
+      </ul>
+    </nav>
+  </header>
 
+  <div class="main-container">
+    <aside class="sidebar">
+      <button onclick="location.href='/transfer'">Transferir dinero</button>
+      <button onclick="location.href='/museo'">Museo</button>
+      <button onclick="location.href='/historial'">Historial de transferencias</button>
+    </aside>
+
+    <main class="content">
+  <div class="card-container">
+    
+    <!-- Tarjeta Dinero disponible -->
+    <div class="card">
+      <h3>Dinero disponible <a class="cvu-link" href="#">Tu CVU</a></h3>
+      <p class="balance">$ *** <span class="eye-icon">👁️</span></p>
+      <p class="to-settle">$ *** a liquidar</p>
+      <hr>
+      <p class="total-earned">$ *** generados en total <span class="badge">▲ 26,3%</span></p>
+      <div class="button-group">
+        <button class="primary">Ingresar dinero</button>
+        <button class="primary">Transferir dinero</button>
+      </div>
+    </div>
+
+    <!-- Tarjeta Actividad -->
+    <div class="card">
+      <h3>Tu actividad</h3>
+      <div class="error-message">
+        <span class="warning-icon">⚠️</span>
+        <p>Algo falló y no pudimos mostrar sus actividades.</p>
+        <a href="#" class="retry">Reintentar</a>
+      </div>
+      <a href="#" class="view-all">Ver toda tu actividad ➔</a>
+    </div>
+
+  </div>
+</main>
+  </div>
+</body>
