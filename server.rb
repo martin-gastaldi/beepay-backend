@@ -75,6 +75,7 @@ class App < Sinatra::Application
     )
     # Aquí se crea un nuevo usuario con los parámetros del formulario.
     if user.save
+        Account.create(user: user, balance: 0) # Si el usuario se guarda correctamente, se crea una cuenta asociada con un saldo inicial de 0.
         session[:user_id] = user.id
         redirect '/welcome' # Redirige al usuario al panel de control después de un registro exitoso.
     else
@@ -101,14 +102,29 @@ class App < Sinatra::Application
         erb :login # Si la autenticación falla, muestra un mensaje de error y vuelve a renderizar el formulario de inicio de sesión.
     end
     end
-    # Ruta para cerrar sesión.
-    get '/welcome' do     
-    @user = User.find_by(id: session[:user_id])
-    if @user
-        erb :welcome
-    else
+
+    get '/welcome' do
+    user = User.find_by(id: session[:user_id])
+    if user.nil?
         redirect '/login'
     end
+
+    account = user.account
+    unless account
+    return erb :welcome, locals: {
+      user_name: user.user_name,
+      balance: 0,
+      transactions: [],
+      error: "No tienes una cuenta asociada."
+    }
     end
 
+    recent_transactions = account.sent_transactions.order(created_at: :desc).limit(5)
+    erb :welcome, locals: {
+    user_name: user.user_name,
+    balance: account.balance,
+    transactions: recent_transactions,
+    error: nil
+    }
+    end
 end

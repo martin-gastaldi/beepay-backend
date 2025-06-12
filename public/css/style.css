@@ -183,8 +183,8 @@ label{
 
 /*  vista welcome*/
 
-header {
-  background-color: #ffe600;
+.header_welcome {
+  background-color:var(--primary-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -259,16 +259,17 @@ nav a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.1em;
+  font-size: 1.5rem;
 }
 
 .cvu-link {
   font-size: 0.85em;
-  background-color: #eef3ff;
+  background-color: #000000;
   padding: 4px 8px;
   border-radius: 6px;
   color: var(--primary-color);
   text-decoration: none;
+  font-family: var(--primary-font);
 }
 
 .balance {
@@ -334,4 +335,126 @@ nav a {
   color: var(--primary-color);
   text-decoration: none;
   font-weight: bold;
+}
+
+button.primary{
+  background-color: var(--primary-color);
+  color: black;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-family: var(--primary-font);
+}
+
+button.primero, button.segundo, button.tercero{
+  background-color: var(--primary-color);
+  color: black;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-family: var(--primary-font);
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #0d0d0d;
+  color: white;
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 80px; 
+  background-color: #121212;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1rem;
+  padding-right:3rem;
+}
+
+.menu li {
+  list-style: none;
+  margin: 1.5rem 0;
+}
+
+.main-content {
+  margin-left: 150px;
+  padding: 2rem;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.balance-card {
+  background: #fcd200;
+  padding: 1.5rem;
+  border-radius: 16px;
+  color: #000;
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  position: relative;
+}
+
+.balance {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.actions button {
+  background: none;
+  border: 2px solid #fcd200;
+  color: #fcd200;
+  border-radius: 50%;
+  padding: 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.payments {
+  margin-top: 2rem;
+}
+
+.payment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.footer-icons {
+  display: flex;
+  justify-content: space-around;
+  background-color: #fcd200;
+  padding: 0.5rem;
+  border-radius: 12px;
+  margin-top: 2rem;
+}
+
+.footer-icons button {
+  background: none;
+  border: none;
+  cursor: pointer;
 }
