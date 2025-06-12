@@ -28,6 +28,7 @@ body {
 .left .slogan{
   text-align: center;
   font-size: 25px;
+  font-family: var(--primary-font);
   color: #c5c5c5;
   text-shadow: 0 0 10px rgb(0, 0, 0), 0 0 20px rgb(19, 19, 19);
   text-transform: uppercase;
@@ -156,6 +157,9 @@ label{
   margin-right: 1.5rem;
 }
 
+.header-welcome{
+  margin-left: 80px;
+}
 .texto-header {
   color: wheat;
   font-family: Arial, Helvetica, sans-serif;
@@ -190,6 +194,7 @@ label{
   align-items: center;
   padding: 10px 20px;
   font-family: var(--primary-font);
+  
 }
 
 .logo {
@@ -215,24 +220,6 @@ nav a {
   background-color: #000000;
 }
 
-.sidebar {
-  width: 250px;
-  background-color: #3f3f3f;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.sidebar button {
-  padding: 10px;
-  font-size: 1em;
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
-}
 
 .content {
   flex: 1;
@@ -362,32 +349,53 @@ button.primero, button.segundo, button.tercero{
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: #0d0d0d;
+  background: image(url('/images/panal.png'));
   color: white;
 }
 
 .sidebar {
   position: fixed;
-  left: 0;
-  top: 0;
+  left: 1; /*esto es para que el sidebar quede pegado a la izquierda */
+  top: 1; /*esto es para que el sidebar quede pegado a la parte superior */
   bottom: 0;
-  width: 80px; 
-  background-color: #121212;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 1rem;
-  padding-right:3rem;
+  width: 130px; /* ancho del sidebar */
+  background: #000000;
+  transition: width 0.3s;
+  overflow-x: hidden;
+  z-index: 1000;
+  margin-top:-50px ;
+}
+
+.sidebar.collapsed {
+  width: 0; 
+  padding: 0;
+  overflow: hidden;
+}
+
+.main-content {
+  transition: margin-left 0.3s;
+  margin-left: 130px;
+  padding: 2rem;
+}
+
+.sidebar.collapsed + .main-content {
+  margin-left: 0;
 }
 
 .menu li {
   list-style: none;
   margin: 1.5rem 0;
+  margin-top: 50px;
+  
 }
 
-.main-content {
-  margin-left: 150px;
-  padding: 2rem;
+
+.menu-icon {
+  position: fixed;
+  left: 0;
+  margin-left: -30px;
+  top: 20px;
+  z-index: 2001; /*mayor que el sidebar*/
 }
 
 header {
