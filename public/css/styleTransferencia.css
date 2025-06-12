@@ -1,0 +1,135 @@
+/* 
+    Vista /transferir.
+*/
+
+
+:root {
+    --primary-color: #ffcf00;
+    --primary-font: "Oswald", sans-serif;
+}
+
+body {
+    background-color: #000000;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    margin: 0;
+    padding: 0;
+}
+
+.botonVolver {
+    margin-top: 50px;
+    margin-left: 50px;
+    height: 100px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.botonVolver:hover {
+    background-color: #e6b800;
+    transform: scale(1.05);
+    border-radius: 50%;
+}
+
+header h1 {
+    color:#ffcf00;
+    font-family: var(--primary-font);
+    font-size: 100px;
+    text-align: center;
+    margin-top: -40px;
+}
+
+form {
+    color:#ffcf00;
+    font-family: var(--primary-font);
+    font-size: 40px;
+    width: fit-content;
+    text-align: center;
+    margin: 150px auto 0 auto;
+}
+
+input {
+    background-color: #1a1a1a;
+    color: #ffcf00;
+    font-size: 30px;
+    font-family: var(--primary-font);
+    border: 2px solid #ffcf00;
+    border-radius: 10px;
+    padding: 10px 20px;
+    width: 500px;
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+input:hover {
+    border-color: #ffffff;
+    background-color: #2a2a2a;
+    transform: scale(1.02);
+    transition: all 0.2s ease;
+}
+
+.botonFormulario {
+    background-color: #ffcf00;
+    color: #000000;
+    font-size: 30px;
+    font-family: var(--primary-font);
+    padding: 12px 30px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.botonFormulario:hover {
+    background-color: #e6b800;
+    transform: scale(1.05);
+}
+
+/* 
+    Vista /seleccionarMontoTransferencia.
+*/
+
+.teclado {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.monto {
+    margin-top: -70px;
+}
+
+.teclado button {
+    font-size: 24px;
+    background-color: #000;
+    color: #ffcf00;
+    border: 2px solid #ffcf00;
+    border-radius: 15px;
+    padding: 15px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.teclado button:hover {
+    background-color: #1a1a1a;
+    transform: scale(1.1);
+}
+
+.calculadora {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    height: 100px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.calculadora:hover {
+    background-color: #1a1a1a;
+    transform: scale(1.05);
+    border-radius: 25%;
+}
