@@ -363,7 +363,7 @@ body {
   transition: width 0.3s;
   overflow-x: hidden;
   z-index: 1000;
-  margin-top:-50px ;
+  
 }
 
 .sidebar.collapsed {
@@ -386,6 +386,7 @@ body {
   list-style: none;
   margin: 1.5rem 0;
   margin-top: 50px;
+  margin-bottom: 60px;
   
 }
 
