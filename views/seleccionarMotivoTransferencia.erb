@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Confirmar transferencia</title>
+  <link href = "https://fonts.googleapis.com/css2?family=Anton&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap" rel = "stylesheet">
+  <link href = "https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel = "stylesheet">
+  <link rel = "stylesheet" href = "../public/css/styleTransferencia.css">
+  
+</head>
+<body>
+  <header>
+    <a href = "/seleccionarMontoTransferencia">
+      <img src = "../public/icons/botonVolver.png" class = "botonVolver">
+    </a>
+    <h1>Finalizar transferencia</h1>
+  </header>
+
+  <div class = "datos">
+    <p>Destinatario: <%= @target_account %></p>
+  </div>
+  <br>
+  <div class = "datos">
+    <p>Monto: $ <%= @amount %></p>
+  </div>  
+
+  <form action = "/welcome" class = "formularioMotivo" method = "post">
+    <label for = "motivo">Motivo de la transferencia: </label>
+    <br>
+    <input type = "text" name = "reason" placeholder = "Ingrese breve descripcion del motivo."/>
+    <br>
+    <br>
+    <button type="submit" class="botonFormulario" onclick="finalizar(event)">Finalizar</button>
+  </form>
+  <div id="mensaje-exito">✔️ Operación realizada con éxito</div>
+
+  <script>
+    function finalizar(event) {
+      event.preventDefault(); 
+      const mensaje = document.getElementById("mensaje-exito");
+      mensaje.style.display = "block";
+      setTimeout(() => {
+        window.location.href = "/welcome"; 
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
