@@ -275,4 +275,8 @@ class App < Sinatra::Application
         end
 
     end
+
+    get '/calculadora' do
+        erb :calculadora
+    end 
 end

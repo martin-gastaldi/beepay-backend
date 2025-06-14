@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Calculadora</title>
+    <link href = "https://fonts.googleapis.com/css2?family=Anton&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap" rel = "stylesheet">
+    <link href = "https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel = "stylesheet">
+    <link rel = "stylesheet" href = "/css/styleTransferencia.css">
+</head>
+<body>
+    <header>
+    <a href = "/seleccionarMontoTransferencia">
+      <img src = "/icons/botonVolver.png" class = "botonVolver">
+    </a>
+    <h1>Calculadora</h1>
+  </header>
+    <div class="calculadoraReal">
+        <div class="pantalla">0</div>
+        <button id= c class="botonCalc">C</button>
+        <button id = borrar class="botonCalc">←</button>
+        <button class="botonCalc">/</button>
+        <button class="botonCalc">*</button>
+        <button class="botonCalc">7</button>
+        <button class="botonCalc">8</button>
+        <button class="botonCalc">9</button>
+        <button class="botonCalc">-</button>
+        <button class="botonCalc">4</button>
+        <button class="botonCalc">5</button>
+        <button class="botonCalc">6</button>
+        <button class="botonCalc">+</button>
+        <button class="botonCalc">1</button>
+        <button class="botonCalc">2</button>  
+        <button class="botonCalc">3</button>
+        <button id=igual class="botonCalc">=</button>
+        <button id=cero class="botonCalc">0</button>
+        <button class="botonCalc">.</button>
+    </div>
+
+
+    <script>
+        const pantalla = document.querySelector(".pantalla");
+        const botones = document.querySelectorAll(".botonCalc");
+
+        botones.forEach(boton =>{
+        boton.addEventListener("click", () => {
+        const botonApretado = boton.textContent;
+
+        if(boton.id === "c"){
+            pantalla.textContent = "0";
+            return;
+        }
+
+        if(boton.id === "borrar"){
+            if(pantalla.textContent.length === 1 || pantalla.textContent === "Error" || pantalla.textContent == "Infinity"){
+                pantalla.textContent = "0";
+            }
+            else{
+                pantalla.textContent = pantalla.textContent.slice(0, -1);
+            }           
+            return;
+        }
+
+        if ((boton.id==="igual" && pantalla.textContent=== "Error") || (boton.id==="igual" && pantalla.textContent=== "Infinity")){
+            pantalla.textContent = "0";
+        }
+        
+        if (boton.id==="igual"){
+            try{
+                pantalla.textContent= eval(pantalla.textContent);
+            }
+            catch{
+                pantalla.textContent = "Error";
+            }
+            return;
+        }
+
+
+        if(pantalla.textContent==="0" || pantalla.textContent === "Error" || pantalla.textContent === "Infinity"){
+            pantalla.textContent = botonApretado;
+        }
+
+        else{
+            pantalla.textContent += botonApretado;
+        }
+
+    })
+})
+    </script>
+</body>
+</html>
