@@ -148,19 +148,20 @@ class App < Sinatra::Application
         account = user.account
         target_account = Account.find_by(alias: session[:target_account_alias])
         amount = session[:amount].to_i
-        reason = session[:reason] # <-- Cambia esto
+        reason = session[:reason]
 
         # Validaciones
         if account.nil? || target_account.nil? || amount <= 0 || reason.nil? || reason.strip.empty?
             @error = "Datos inválidos para la transferencia."
             return erb :seleccionarMotivoTransferencia, locals: { error: @error, amount: amount }
         end
-
+        puts "DEBUG: target_account_alias=#{session[:target_account_alias]}, amount=#{session[:amount]}, reason=#{session[:reason]}"
         # Realizar transferencia
         Transaction.create(source_account: account, target_account: target_account, amount: amount, reason: reason)
-        account.update(balance: account.balance - amount)
-        target_account.update(balance: target_account.balance + amount)
-
+        
+        session[:target_account_alias] = nil
+        session[:amount] = nil
+        session[:reason] = nil
         redirect '/welcome'
     end
 
@@ -177,29 +178,7 @@ class App < Sinatra::Application
 
         erb :transferir, locals: { error: nil, account: account }
     end
-    post '/transferir' do
-        user = User.find_by(id: session[:user_id])
-        if user.nil?
-            redirect '/login'
-        end
-
-        account = user.account
-        if account.nil?
-            return erb :transferir, locals: { error: "No tienes una cuenta asociada." }
-        end
-
-        target_account = Account.find_by(alias: params[:target_account_alias])
-        if target_account.nil?
-            return erb :transferir, locals: { error: "Cuenta de destino no encontrada.", account: account }
-        end
-
-        amount = params[:amount].to_f
-        if amount <= 0 || amount > account.balance
-            return erb :transferir, locals: { error: "Monto inválido.", account: account }
-        end
-
-        redirect '/welcome'
-    end
+   
 
     get '/seleccionarMontoTransferencia' do
         user = User.find_by(id: session[:user_id])
@@ -215,15 +194,21 @@ class App < Sinatra::Application
         erb :seleccionarMontoTransferencia, locals: { error: nil, account: account }
     end
 
-    post '/seleccionarMontoTransferencia' do
+   post '/seleccionarMontoTransferencia' do
         user = User.find_by(id: session[:user_id])
-        if user.nil?
-            redirect '/login'
-        end
+        redirect '/login' if user.nil?
 
         account = user.account
-        if account.nil?
-            return erb :seleccionarMontoTransferencia, locals: { error: "No tienes una cuenta asociada." }
+        return erb :seleccionarMontoTransferencia, locals: { error: "No tienes una cuenta asociada." } if account.nil?
+
+        # Si viene el destinatario, guardalo en la sesión
+        if params[:target_account]
+            session[:target_account_alias] = params[:target_account]
+        end
+
+        # Si NO está en la sesión, error
+        if session[:target_account_alias].nil? || session[:target_account_alias].strip.empty?
+            return erb :seleccionarMontoTransferencia, locals: { error: "Debes ingresar un destinatario.", account: account }
         end
 
         amount = params[:amount].to_f
@@ -231,8 +216,8 @@ class App < Sinatra::Application
             return erb :seleccionarMontoTransferencia, locals: { error: "Monto inválido.", account: account }
         end
 
-        # Aquí podrías redirigir a una página de confirmación o continuar con la transferencia.
-        redirect '/transferir'
+        session[:amount] = params[:amount]
+        redirect '/seleccionarMotivoTransferencia'
     end
 
     get '/seleccionarMotivoTransferencia' do
@@ -251,31 +236,19 @@ class App < Sinatra::Application
 
     post '/seleccionarMotivoTransferencia' do
         user = User.find_by(id: session[:user_id])
-        if user.nil?
-            redirect '/login'
-        end
+        redirect '/login' if user.nil?
 
         account = user.account
-        if account.nil?
-            return erb :seleccionarMotivoTransferencia, locals: { error: "No tienes una cuenta asociada.", amount: nil }
-        end
-
-        amount = (params[:amount] || session[:amount]).to_i
-        session[:amount] = amount
+        return erb :seleccionarMotivoTransferencia, locals: { error: "No tienes una cuenta asociada.", amount: nil } if account.nil?
 
         reason = params[:reason]
-        target_account = Account.find_by(alias: params[:target_account_alias])
-
-        if target_account.nil?
-            return erb :seleccionarMotivoTransferencia, locals: { error: "Cuenta de destino no encontrada.", account: account, amount: amount }
-        end
-
         if reason.nil? || reason.strip.empty?
-            return erb :seleccionarMotivoTransferencia, locals: { error: "Motivo inválido.", account: account, amount: amount }
+            return erb :seleccionarMotivoTransferencia, locals: { error: "Motivo inválido.", account: account, amount: session[:amount] }
         end
 
+        session[:reason] = reason
+        redirect '/welcome'
     end
-
     get '/calculadora' do
         erb :calculadora
     end 

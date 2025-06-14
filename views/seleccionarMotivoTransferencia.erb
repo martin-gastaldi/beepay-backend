@@ -16,15 +16,15 @@
   </header>
 
   <div class = "datos">
-    <p> <strong>Destinatario:</strong> <%= @target_account %></p>
+    <p><strong>Destinatario:</strong> <%= session[:target_account_alias] %></p>
   </div>
   <br>
   <div class = "datos">
-    <p><strong>Monto:</strong> $ <%= amount %></p>
+    <p><strong>Monto:</strong> $ <%= session[:amount] %></p>
   </div>  
 
   <form action="/welcome" class="formularioMotivo" method="post">
-    <label for="motivo">Motivo de la transferencia: </label>
+    <label for="reason">Motivo de la transferencia: </label>
     <br>
     <input type="text" name="reason" placeholder="Ingrese breve descripcion del motivo." required />
     <br><br>

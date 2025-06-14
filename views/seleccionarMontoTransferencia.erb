@@ -1,37 +1,36 @@
-
 <head>
   <title>Seleccionar monto a transferir</title>
-  <link href = "https://fonts.googleapis.com/css2?family=Anton&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap" rel = "stylesheet">
-  <link href = "https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel = "stylesheet">
-  <link rel = "stylesheet" href = "/css/styleTransferencia.css">
-</head> 
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styleTransferencia.css">
+</head>
 <body>
   <header>
-    <a href = "/transferir">
-      <img src = "/icons/botonVolver.png" class = "botonVolver">
+    <a href="/transferir">
+      <img src="/icons/botonVolver.png" class="botonVolver">
     </a>
-    <a href = "/calculadora">
-      <img src = "/icons/calculadora.png" class = "calculadora">
+    <a href="/calculadora">
+      <img src="/icons/calculadora.png" class="calculadora">
     </a>
     <h1>Monto de dinero a transferir</h1>
   </header>
-  <form action = "/seleccionarMotivoTransferencia" method = "post">
-    <div class = "monto" >$0</div>
-    <input type = "hidden" name = "amount" id = "amountInput"/> 
-    <div class = "teclado">
-      <button type = "button">1</button>
-      <button type = "button">2</button>
-      <button type = "button">3</button>
-      <button type = "button">4</button>
-      <button type = "button">5</button>
-      <button type = "button">6</button>
-      <button type = "button">7</button>
-      <button type = "button">8</button>
-      <button type = "button">9</button>
-      <button type = "button">0</button>
-      <button type = "button" class = "borrar"><img src="/icons/botonVolver.png" height = "30"></button>
+  <form action="/seleccionarMotivoTransferencia" method="post">
+    <div class="monto">$0</div>
+    <input type="hidden" name="amount" id="amountInput"/>
+    <div class="teclado">
+      <button type="button">1</button>
+      <button type="button">2</button>
+      <button type="button">3</button>
+      <button type="button">4</button>
+      <button type="button">5</button>
+      <button type="button">6</button>
+      <button type="button">7</button>
+      <button type="button">8</button>
+      <button type="button">9</button>
+      <button type="button">0</button>
+      <button type="button" class="borrar"><img src="/icons/botonVolver.png" height="30"></button>
     </div>
-    <button type="submit" class = "botonFormulario">Continuar</button>
+    <button type="submit" class="botonFormulario">Continuar</button>
   </form>
   <script>
     const display = document.querySelector('.monto');
