@@ -38,10 +38,10 @@ class App < Sinatra::Application
     end
 
    get '/transactions/history' do
-   account = Account.find(params[:account_id])
-   history = TransactionHistoryService.new(account).call
+    account = Account.find(params[:account_id])
+    history = TransactionHistoryService.new(account).call
 
-   {
+    {
     sent: history[:sent].map { |t| format_transaction(t) },
     received: history[:received].map { |t| format_transaction(t) }
      }.to_json
@@ -68,63 +68,211 @@ class App < Sinatra::Application
     end
     # Ruta para manejar el envío del formulario de registro.
     post '/signup' do
-    user = User.new(
-        user_name: params[:user_name], 
-        email: params[:email],
-        password: params[:password], 
-    )
-    # Aquí se crea un nuevo usuario con los parámetros del formulario.
-    if user.save
-        Account.create(user: user, balance: 0) # Si el usuario se guarda correctamente, se crea una cuenta asociada con un saldo inicial de 0.
-        session[:user_id] = user.id
-        redirect '/welcome' # Redirige al usuario al panel de control después de un registro exitoso.
-    else
-        @error = user.errors.full_messages.join(", ") # Si hay errores al guardar el usuario, se muestran en la vista.
-        # Se utiliza 'full_messages' para obtener un mensaje de error legible.
-        # 'join' une los mensajes de error en una sola cadena separada por comas.
-        erb :signup # Renderiza la vista de registro nuevamente con los errores.
+        user = User.new(
+            user_name: params[:user_name], 
+            email: params[:email],
+            password: params[:password], 
+        )
+        # Aquí se crea un nuevo usuario con los parámetros del formulario.
+        if user.save
+        # Generar alias automático
+            base_alias = user.user_name.downcase.gsub(/\s+/, "") # sin espacios y en minúscula
+            unique_alias = "#{base_alias}#{user.id || rand(1000..9999)}"
+
+            # Asegurar unicidad (opcional, si no tienes validación en modelo)
+            while Account.exists?(alias: unique_alias)
+                unique_alias = "#{base_alias}#{rand(1000..9999)}"
+            end
+            generated_cbu = SecureRandom.hex(11) # Genera un CBU/CVU aleatorio de 22 caracteres hexadecimales.
+            Account.create(user: user, balance: 500, alias: unique_alias,cbu_cvu: generated_cbu)
+            session[:user_id] = user.id
+            redirect '/welcome'
+        else
+            @error = user.errors.full_messages.join(", ")
+            erb :signup
+        end
     end
-    end
+    
     # Ruta para mostrar el formulario de inicio de sesión.
     get '/login' do
      erb :login
     end
+
     # Ruta para manejar el envío del formulario de inicio de sesión.
     post '/login' do
         
-    user = User.find_by(email: params[:email])  # Busca al usuario por su correo electrónico.
+        user = User.find_by(email: params[:email])  # Busca al usuario por su correo electrónico.
 
-    if user && user.authenticate(params[:password]) # Verifica si el usuario existe y si la contraseña es correcta.
-        session[:user_id] = user.id # Si la autenticación es exitosa, guarda el ID del usuario en la sesión.
-        redirect '/welcome' # Redirige al usuario a la página de bienvenida (o panel de control).
-    else
-        @error = "Invalid email or password"
-        erb :login # Si la autenticación falla, muestra un mensaje de error y vuelve a renderizar el formulario de inicio de sesión.
-    end
+        if user && user.authenticate(params[:password]) # Verifica si el usuario existe y si la contraseña es correcta.
+            session[:user_id] = user.id # Si la autenticación es exitosa, guarda el ID del usuario en la sesión.
+            redirect '/welcome' # Redirige al usuario a la página de bienvenida (o panel de control).
+        else
+            @error = "Invalid email or password"
+            erb :login # Si la autenticación falla, muestra un mensaje de error y vuelve a renderizar el formulario de inicio de sesión.
+        end
     end
 
     get '/welcome' do
-    user = User.find_by(id: session[:user_id])
-    if user.nil?
-        redirect '/login'
+        user = User.find_by(id: session[:user_id])
+        if user.nil?
+            redirect '/login'
+        end
+
+        account = user.account
+        unless account
+        return erb :welcome, locals: {
+            user_name: user.user_name,
+            balance: 0,
+            transactions: [],
+            error: "No tienes una cuenta asociada.",
+            account_alias: nil
+        }
+        end
+
+        recent_transactions = account.source_transactions.order(created_at: :desc).limit(5)
+        erb :welcome, locals: {
+        user_name: user.user_name,
+        balance: account.balance,
+        transactions: recent_transactions,
+        error: nil,
+        account_alias: account.alias,
+        account: account
+
+        }
     end
 
-    account = user.account
-    unless account
-    return erb :welcome, locals: {
-      user_name: user.user_name,
-      balance: 0,
-      transactions: [],
-      error: "No tienes una cuenta asociada."
-    }
+    post '/welcome' do
+        user = User.find_by(id: session[:user_id])
+        redirect '/login' if user.nil?
+
+        account = user.account
+        target_account = Account.find_by(alias: session[:target_account_alias])
+        amount = session[:amount].to_i
+        reason = session[:reason] # <-- Cambia esto
+
+        # Validaciones
+        if account.nil? || target_account.nil? || amount <= 0 || reason.nil? || reason.strip.empty?
+            @error = "Datos inválidos para la transferencia."
+            return erb :seleccionarMotivoTransferencia, locals: { error: @error, amount: amount }
+        end
+
+        # Realizar transferencia
+        Transaction.create(source_account: account, target_account: target_account, amount: amount, reason: reason)
+        account.update(balance: account.balance - amount)
+        target_account.update(balance: target_account.balance + amount)
+
+        redirect '/welcome'
     end
 
-    recent_transactions = account.sent_transactions.order(created_at: :desc).limit(5)
-    erb :welcome, locals: {
-    user_name: user.user_name,
-    balance: account.balance,
-    transactions: recent_transactions,
-    error: nil
-    }
+    get '/transferir' do
+        user = User.find_by(id: session[:user_id])
+        if user.nil?
+            redirect '/login'
+        end
+
+        account = user.account
+        if account.nil?
+            return erb :transferir, locals: { error: "No tienes una cuenta asociada." }
+        end
+
+        erb :transferir, locals: { error: nil, account: account }
+    end
+    post '/transferir' do
+        user = User.find_by(id: session[:user_id])
+        if user.nil?
+            redirect '/login'
+        end
+
+        account = user.account
+        if account.nil?
+            return erb :transferir, locals: { error: "No tienes una cuenta asociada." }
+        end
+
+        target_account = Account.find_by(alias: params[:target_account_alias])
+        if target_account.nil?
+            return erb :transferir, locals: { error: "Cuenta de destino no encontrada.", account: account }
+        end
+
+        amount = params[:amount].to_f
+        if amount <= 0 || amount > account.balance
+            return erb :transferir, locals: { error: "Monto inválido.", account: account }
+        end
+
+        redirect '/welcome'
+    end
+
+    get '/seleccionarMontoTransferencia' do
+        user = User.find_by(id: session[:user_id])
+        if user.nil?
+            redirect '/login'
+        end
+
+        account = user.account
+        if account.nil?
+            return erb :seleccionarMontoTransferencia, locals: { error: "No tienes una cuenta asociada." }
+        end
+
+        erb :seleccionarMontoTransferencia, locals: { error: nil, account: account }
+    end
+
+    post '/seleccionarMontoTransferencia' do
+        user = User.find_by(id: session[:user_id])
+        if user.nil?
+            redirect '/login'
+        end
+
+        account = user.account
+        if account.nil?
+            return erb :seleccionarMontoTransferencia, locals: { error: "No tienes una cuenta asociada." }
+        end
+
+        amount = params[:amount].to_f
+        if amount <= 0 || amount > account.balance
+            return erb :seleccionarMontoTransferencia, locals: { error: "Monto inválido.", account: account }
+        end
+
+        # Aquí podrías redirigir a una página de confirmación o continuar con la transferencia.
+        redirect '/transferir'
+    end
+
+    get '/seleccionarMotivoTransferencia' do
+        user = User.find_by(id: session[:user_id])
+        if user.nil?
+            redirect '/login'
+        end
+        
+        account = user.account
+        if account.nil?
+            return erb :seleccionarMotivoTransferencia, locals: { error: "No tienes una cuenta asociada." }
+        end
+
+        erb :seleccionarMotivoTransferencia, locals: { error: nil, account: account }
+    end
+
+    post '/seleccionarMotivoTransferencia' do
+        user = User.find_by(id: session[:user_id])
+        if user.nil?
+            redirect '/login'
+        end
+
+        account = user.account
+        if account.nil?
+            return erb :seleccionarMotivoTransferencia, locals: { error: "No tienes una cuenta asociada.", amount: nil }
+        end
+
+        amount = (params[:amount] || session[:amount]).to_i
+        session[:amount] = amount
+
+        reason = params[:reason]
+        target_account = Account.find_by(alias: params[:target_account_alias])
+
+        if target_account.nil?
+            return erb :seleccionarMotivoTransferencia, locals: { error: "Cuenta de destino no encontrada.", account: account, amount: amount }
+        end
+
+        if reason.nil? || reason.strip.empty?
+            return erb :seleccionarMotivoTransferencia, locals: { error: "Motivo inválido.", account: account, amount: amount }
+        end
+
     end
 end
