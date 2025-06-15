@@ -124,21 +124,23 @@ class App < Sinatra::Application
             user_name: user.user_name,
             balance: 0,
             transactions: [],
+            received_transactions: [],
             error: "No tienes una cuenta asociada.",
             account_alias: nil
         }
         end
 
-        recent_transactions = account.source_transactions.order(created_at: :desc).limit(5)
-        erb :welcome, locals: {
-        user_name: user.user_name,
-        balance: account.balance,
-        transactions: recent_transactions,
-        error: nil,
-        account_alias: account.alias,
-        account: account
-
-        }
+        sent_transactions = account.source_transactions.order(created_at: :desc).limit(5)
+        received_transactions = account.target_transactions.order(created_at: :desc).limit(5)
+            erb :welcome, locals: {
+                user_name: user.user_name,
+                balance: account.balance,
+                sent_transactions: sent_transactions,
+                received_transactions: received_transactions,
+                error: nil,
+                account_alias: account.alias,
+                account: account
+            }
     end
 
     post '/welcome' do
@@ -175,11 +177,11 @@ class App < Sinatra::Application
             return erb :seleccionarMotivoTransferencia, locals: { error: @error, amount: amount }
         end
 
-        # Limpiar sesión SOLO después de transferencia exitosa
+        # Limpiar sesión SOLO después de transferencia exitosa, esto es para evitar problemas si el usuario refresca la página
         session[:target_account_alias] = nil
-        session[:amount] = nil
-        session[:reason] = nil
-
+        session[:amount] = nil # Limpiar el monto
+        session[:reason] = nil # Limpiar el motivo
+        
         redirect '/welcome'
     end
 
