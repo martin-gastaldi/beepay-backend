@@ -14,24 +14,28 @@
     </a>
     <h1>Monto de dinero a transferir</h1>
   </header>
-  <form action="/seleccionarMotivoTransferencia" method="post">
-    <div class="monto">$0</div>
-    <input type="hidden" name="amount" id="amountInput"/>
-    <div class="teclado">
-      <button type="button">1</button>
-      <button type="button">2</button>
-      <button type="button">3</button>
-      <button type="button">4</button>
-      <button type="button">5</button>
-      <button type="button">6</button>
-      <button type="button">7</button>
-      <button type="button">8</button>
-      <button type="button">9</button>
-      <button type="button">0</button>
-      <button type="button" class="borrar"><img src="/icons/botonVolver.png" height="30"></button>
-    </div>
-    <button type="submit" class="botonFormulario">Continuar</button>
-  </form>
+    <form action="/seleccionarMotivoTransferencia" method="post">
+      
+      <div class="monto"> $0 
+      </div>
+       
+      <input type="hidden" name="amount" id="amountInput"/>
+
+        <div class="teclado">
+          <button type="button">1</button>
+          <button type="button">2</button>
+          <button type="button">3</button>
+          <button type="button">4</button>
+          <button type="button">5</button>
+          <button type="button">6</button>
+          <button type="button">7</button>
+          <button type="button">8</button>
+          <button type="button">9</button>
+          <button type="button">0</button>
+          <button type="button" class="borrar"><img src="/icons/botonVolver.png" height="30"></button>
+        </div>
+          <button type="submit" class="botonFormulario">Continuar</button>
+</form>
   <script>
     const display = document.querySelector('.monto');
     const input = document.querySelector('#amountInput');

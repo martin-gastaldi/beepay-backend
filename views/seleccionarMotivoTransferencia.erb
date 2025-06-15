@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html>
+
 <head>
   <title>Confirmar transferencia</title>
   <link href = "https://fonts.googleapis.com/css2?family=Anton&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap" rel = "stylesheet">
@@ -20,16 +19,15 @@
   </div>
   <br>
   <div class = "datos">
-    <p><strong>Monto:</strong> $ <%= session[:amount] %></p>
+    <p><strong>Monto:</strong> $ <%= amount %></p>
   </div>  
 
   <form action="/welcome" class="formularioMotivo" method="post">
     <label for="reason">Motivo de la transferencia: </label>
     <br>
-    <input type="text" name="reason" placeholder="Ingrese breve descripcion del motivo." required />
+    <input type="text" name="reason" required>
     <br><br>
     <button type="submit" class="botonFormulario">Finalizar</button>
   </form>
   <div id="mensaje-exito" style="display:none;">✔️ Operación realizada con éxito</div>
 </body>
-</html>

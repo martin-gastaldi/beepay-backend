@@ -145,6 +145,14 @@ class App < Sinatra::Application
         user = User.find_by(id: session[:user_id])
         redirect '/login' if user.nil?
 
+        # Si el motivo viene por params, guardalo en la sesión
+        session[:reason] = params[:reason] if params[:reason]
+
+        # Validar que todos los datos estén presentes
+        if session[:target_account_alias].nil? || session[:amount].nil? || session[:reason].nil?
+            redirect '/transferir'
+        end
+
         account = user.account
         target_account = Account.find_by(alias: session[:target_account_alias])
         amount = session[:amount].to_i
@@ -155,13 +163,23 @@ class App < Sinatra::Application
             @error = "Datos inválidos para la transferencia."
             return erb :seleccionarMotivoTransferencia, locals: { error: @error, amount: amount }
         end
-        puts "DEBUG: target_account_alias=#{session[:target_account_alias]}, amount=#{session[:amount]}, reason=#{session[:reason]}"
-        # Realizar transferencia
-        Transaction.create(source_account: account, target_account: target_account, amount: amount, reason: reason)
-        
+
+        transaction = Transaction.create(
+            source_account: account,
+            target_account: target_account,
+            amount: amount,
+            reason: reason
+        )
+        unless transaction.persisted?
+            @error = transaction.errors.full_messages.join(', ')
+            return erb :seleccionarMotivoTransferencia, locals: { error: @error, amount: amount }
+        end
+
+        # Limpiar sesión SOLO después de transferencia exitosa
         session[:target_account_alias] = nil
         session[:amount] = nil
         session[:reason] = nil
+
         redirect '/welcome'
     end
 
@@ -182,9 +200,7 @@ class App < Sinatra::Application
 
     get '/seleccionarMontoTransferencia' do
         user = User.find_by(id: session[:user_id])
-        if user.nil?
-            redirect '/login'
-        end
+        redirect '/login' if user.nil?
 
         account = user.account
         if account.nil?
@@ -211,27 +227,30 @@ class App < Sinatra::Application
             return erb :seleccionarMontoTransferencia, locals: { error: "Debes ingresar un destinatario.", account: account }
         end
 
-        amount = params[:amount].to_f
+        amount = params[:amount].to_i
         if amount <= 0 || amount > account.balance
             return erb :seleccionarMontoTransferencia, locals: { error: "Monto inválido.", account: account }
         end
 
-        session[:amount] = params[:amount]
+        session[:amount] = params[:amount].to_i if params[:amount]
         redirect '/seleccionarMotivoTransferencia'
     end
 
     get '/seleccionarMotivoTransferencia' do
         user = User.find_by(id: session[:user_id])
-        if user.nil?
-            redirect '/login'
-        end
-        
+        redirect '/login' if user.nil?
+
         account = user.account
         if account.nil?
             return erb :seleccionarMotivoTransferencia, locals: { error: "No tienes una cuenta asociada." }
         end
 
-        erb :seleccionarMotivoTransferencia, locals: { error: nil, account: account }
+       # Validar que el monto y destinatario estén en sesión
+       if session[:amount].nil? || session[:amount].to_s.strip.empty? || session[:target_account_alias].nil?
+           redirect '/seleccionarMontoTransferencia'
+       end
+
+         erb :seleccionarMotivoTransferencia, locals: { amount: session[:amount], error: nil, account: account }
     end
 
     post '/seleccionarMotivoTransferencia' do
@@ -241,11 +260,13 @@ class App < Sinatra::Application
         account = user.account
         return erb :seleccionarMotivoTransferencia, locals: { error: "No tienes una cuenta asociada.", amount: nil } if account.nil?
 
+        # Si viene el monto por params, actualiza la sesión (por si el usuario refresca)
+        session[:amount] = params[:amount] if params[:amount]
+
         reason = params[:reason]
         if reason.nil? || reason.strip.empty?
             return erb :seleccionarMotivoTransferencia, locals: { error: "Motivo inválido.", account: account, amount: session[:amount] }
         end
-
         session[:reason] = reason
         redirect '/welcome'
     end
