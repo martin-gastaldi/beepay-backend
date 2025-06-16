@@ -64,6 +64,12 @@
         }
         
         if (boton.id==="igual"){
+
+            if (pantalla.textContent.includes("//")) {
+                pantalla.textContent = "Error";
+                return;
+            }
+
             try{
                 pantalla.textContent= eval(pantalla.textContent);
             }
@@ -74,11 +80,13 @@
         }
 
 
-        if(pantalla.textContent==="0" || pantalla.textContent === "Error" || pantalla.textContent === "Infinity"){
+        if (pantalla.textContent === "0" &&botonApretado === "."){
+            pantalla.textContent = "0.";
+        } 
+        else if (pantalla.textContent === "0" || pantalla.textContent === "Error" || pantalla.textContent === "Infinity"){
             pantalla.textContent = botonApretado;
-        }
-
-        else{
+        } 
+        else {
             pantalla.textContent += botonApretado;
         }
 

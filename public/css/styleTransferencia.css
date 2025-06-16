@@ -17,12 +17,20 @@ body {
 header {
     margin: 0;
     padding: 0;
+    margin-bottom: 40px;
+    position: relative;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 8rem;
 }
 
 .botonVolver {
-    margin-top: 1px;
-    margin-left: 50px;
-    height: 100px;
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    height: 95px;
     cursor: pointer;
     transition: transform 0.2s ease;
 }
@@ -34,13 +42,11 @@ header {
 }
 
 header h1 {
-    color:#ffcf00;
+    padding-top: 80px;
+    color: #ffcf00;
     font-family: var(--primary-font);
     font-size: 80px;
-    margin-right: 11rem;
-    margin-top: 15px;
     text-align: center;
-    
 }
 
 form {
