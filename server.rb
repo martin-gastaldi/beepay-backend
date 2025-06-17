@@ -285,5 +285,34 @@ class App < Sinatra::Application
     end
     get '/calculadora' do
         erb :calculadora
-    end 
+    end
+    get '/notificaciones' do
+        user = User.find_by(id: session[:user_id])
+        redirect '/login' if user.nil?
+      
+        # ejemplos para probar la vista, no deberia ir aca y hace falta conectarlo con la base de datos
+        @notifications = [
+          {
+            type: 'transfer',
+            message: 'Recibiste $1,000 de Leonardo',
+            time: 'Hace 2 horas',
+            unread: true
+          },
+          {
+            type: 'deposit',
+            message: 'Depósito exitoso por $3,000',
+            time: 'Ayer',
+            unread: false
+          },
+          {
+            type: 'general',
+            message: 'Actualización de términos y condiciones',
+            time: '15/06/2025',
+            unread: false
+          }
+        ]
+      
+        erb :notificaciones
+      end
+    
 end

@@ -1,0 +1,149 @@
+/* Estilos específicos para notificaciones sin afectar las otras vistas */
+
+/* Estructura principal */
+body.notifications-page {
+  background-color: #000;
+  color: #fff;
+  font-family: 'Oswald', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.notifications-header {
+  background-color: #121212;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.notifications-header h1 {
+  color: #ffcf00;
+  font-family: 'Anton', sans-serif;
+  margin: 0;
+  flex-grow: 1;
+  text-align: center;
+  margin-right: 30px; /* Compensa el botón de volver */
+}
+
+.notifications-back-btn {
+  width: 30px;
+  height: 30px;
+}
+
+/* Contenedor de notificaciones */
+.bee-notifications-container {
+  padding: 15px;
+  min-height: calc(100vh - 160px);
+  background-color: #121212;
+}
+
+/* Lista de notificaciones */
+.bee-notifications-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Items individuales */
+.bee-notification-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.bee-unread {
+  border-left: 4px solid #ffcf00;
+}
+
+/* Iconos */
+.bee-notification-icon {
+  background-color: #2a2a2a;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+}
+
+.bee-notification-icon img {
+  width: 22px;
+  height: 22px;
+}
+
+/* Contenido */
+.bee-notification-content {
+  flex: 1;
+}
+
+.bee-notification-message {
+  color: #fff;
+  margin: 0;
+  font-size: 15px;
+}
+
+.bee-notification-time {
+  color: #a0a0a0;
+  margin: 5px 0 0;
+  font-size: 13px;
+}
+
+/* Indicador de no leído */
+.bee-unread-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #ffcf00;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+/* Sin notificaciones */
+.bee-no-notifications {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.bee-no-notifications img {
+  width: 70px;
+  height: 70px;
+  opacity: 0.2;
+  margin-bottom: 20px;
+}
+
+.bee-no-notifications p {
+  color: #a0a0a0;
+  font-size: 16px;
+}
+
+/* Footer específico */
+.bee-notifications-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  background-color: #121212;
+  border-top: 1px solid #2a2a2a;
+}
+
+.bee-notifications-footer button {
+  background: none;
+  border: none;
+  padding: 5px;
+}
+
+.bee-notifications-footer img {
+  width: 24px;
+  height: 24px;
+}
+
+.bee-active-tab img {
+  filter: brightness(1.2);
+}
