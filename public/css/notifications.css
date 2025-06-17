@@ -1,149 +1,127 @@
-/* Estilos específicos para notificaciones sin afectar las otras vistas */
-
-/* Estructura principal */
-body.notifications-page {
-  background-color: #000;
-  color: #fff;
-  font-family: 'Oswald', sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-.notifications-header {
-  background-color: #121212;
-  padding: 15px;
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid #2a2a2a;
-}
-
-.notifications-header h1 {
-  color: #ffcf00;
-  font-family: 'Anton', sans-serif;
-  margin: 0;
-  flex-grow: 1;
-  text-align: center;
-  margin-right: 30px; /* Compensa el botón de volver */
-}
-
-.notifications-back-btn {
-  width: 30px;
-  height: 30px;
-}
-
-/* Contenedor de notificaciones */
-.bee-notifications-container {
-  padding: 15px;
-  min-height: calc(100vh - 160px);
-  background-color: #121212;
-}
-
-/* Lista de notificaciones */
-.bee-notifications-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-/* Items individuales */
-.bee-notification-item {
-  display: flex;
-  align-items: center;
-  padding: 15px;
-  background-color: #1e1e1e;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  position: relative;
-}
-
-.bee-unread {
-  border-left: 4px solid #ffcf00;
-}
-
-/* Iconos */
-.bee-notification-icon {
-  background-color: #2a2a2a;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 15px;
-}
-
-.bee-notification-icon img {
-  width: 22px;
-  height: 22px;
-}
-
-/* Contenido */
-.bee-notification-content {
-  flex: 1;
-}
-
-.bee-notification-message {
-  color: #fff;
-  margin: 0;
-  font-size: 15px;
-}
-
-.bee-notification-time {
-  color: #a0a0a0;
-  margin: 5px 0 0;
-  font-size: 13px;
-}
-
-/* Indicador de no leído */
-.bee-unread-dot {
-  width: 8px;
-  height: 8px;
-  background-color: #ffcf00;
-  border-radius: 50%;
-  margin-left: 10px;
-}
-
-/* Sin notificaciones */
-.bee-no-notifications {
-  text-align: center;
-  padding: 50px 20px;
-}
-
-.bee-no-notifications img {
-  width: 70px;
-  height: 70px;
-  opacity: 0.2;
-  margin-bottom: 20px;
-}
-
-.bee-no-notifications p {
-  color: #a0a0a0;
-  font-size: 16px;
-}
-
-/* Footer específico */
-.bee-notifications-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
-  background-color: #121212;
-  border-top: 1px solid #2a2a2a;
-}
-
-.bee-notifications-footer button {
-  background: none;
-  border: none;
-  padding: 5px;
-}
-
-.bee-notifications-footer img {
-  width: 24px;
-  height: 24px;
-}
-
-.bee-active-tab img {
-  filter: brightness(1.2);
-}
+/* notifications.css */
+/* Estilos generales para la página de notificaciones */
+body {
+    background-color: #000;
+    margin: 0;
+    padding: 0;
+    font-family: 'Oswald', sans-serif;
+  }
+  
+  /* Header */
+  header {
+    background-color: #121212;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #2a2a2a;
+  }
+  
+  header h1 {
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  header a {
+    display: flex;
+  }
+  
+  .botonVolver {
+    width: 30px;
+    height: 30px;
+  }
+  
+  /* Contenedor principal */
+  .notif-container {
+    background-color: #121212;
+    min-height: calc(100vh - 120px);
+    padding: 15px;
+  }
+  
+  /* Lista de notificaciones */
+  .notif-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Items de notificación */
+  .notif-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background-color: #1E1E1E;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 3px solid transparent;
+  }
+  
+  .notif-item.unread {
+    border-left-color: #FFCF00;
+  }
+  
+  /* Iconos */
+  .notif-icon {
+    background-color: #2D2D2D;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+  }
+  
+  .notif-icon img {
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* Contenido */
+  .notif-content {
+    flex: 1;
+  }
+  
+  .notif-message {
+    color: #FFFFFF;
+    margin: 0;
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+  }
+  
+  .notif-time {
+    color: #A0A0A0;
+    margin: 3px 0 0;
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+  }
+  
+  /* Punto de no leído */
+  .notif-unread-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #FFCF00;
+    border-radius: 50%;
+    margin-left: 8px;
+  }
+  
+  /* Estado vacío */
+  .notif-empty {
+    text-align: center;
+    padding: 40px 15px;
+  }
+  
+  .notif-empty img {
+    width: 60px;
+    height: 60px;
+    opacity: 0.3;
+    margin-bottom: 15px;
+  }
+  
+  .notif-empty p {
+    color: #A0A0A0;
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+  }
+  

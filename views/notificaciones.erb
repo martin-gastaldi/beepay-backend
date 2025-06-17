@@ -4,94 +4,8 @@
   <title>Notificaciones - BeePay</title>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-  <style>
-    /* estilos de esta vista */
-    .notif-container {
-      background-color: #121212;
-      min-height: calc(100vh - 120px);
-      padding: 15px;
-    }
-
-    .notif-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .notif-item {
-      display: flex;
-      align-items: center;
-      padding: 12px;
-      background-color: #1E1E1E;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      border-left: 3px solid transparent;
-    }
-
-    .notif-item.unread {
-      border-left-color: #FFCF00;
-    }
-
-    .notif-icon {
-      background-color: #2D2D2D;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 12px;
-    }
-
-    .notif-icon img {
-      width: 20px;
-      height: 20px;
-    }
-
-    .notif-content {
-      flex: 1;
-    }
-
-    .notif-message {
-      color: #FFFFFF;
-      margin: 0;
-      font-family: 'Oswald', sans-serif;
-      font-size: 14px;
-    }
-
-    .notif-time {
-      color: #A0A0A0;
-      margin: 3px 0 0;
-      font-family: 'Oswald', sans-serif;
-      font-size: 12px;
-    }
-
-    .notif-unread-dot {
-      width: 8px;
-      height: 8px;
-      background-color: #FFCF00;
-      border-radius: 50%;
-      margin-left: 8px;
-    }
-
-    .notif-empty {
-      text-align: center;
-      padding: 40px 15px;
-    }
-
-    .notif-empty img {
-      width: 60px;
-      height: 60px;
-      opacity: 0.3;
-      margin-bottom: 15px;
-    }
-
-    .notif-empty p {
-      color: #A0A0A0;
-      font-family: 'Oswald', sans-serif;
-      font-size: 15px;
-    }
-  </style>
+  <link rel="stylesheet" href="/css/notifications.css">
+  <link rel="stylesheet" href="/css/style.css"> <!-- style.css DEBE CARGARSE DESPUÉS -->
 </head>
 <body>
   <header>
@@ -133,18 +47,22 @@
     <% end %>
   </div>
 
-  <!-- Footer (comun para todas las vistas) -->
+  <!-- Footer idéntico al de welcome.erb -->
   <footer class="footer-icons">
     <button>
       <a href="/welcome" style="text-decoration: none; color: inherit;">
         <img src="/icons/casa.png" style="width: 44px; height: 44px;">
       </a>
     </button>
+    
     <button>
-      <img src="/icons/notificacion.png" style="width: 58px; height: 58px;">
+      <a href="/notificaciones" style="text-decoration: none; color: inherit;">
+        <img src="/icons/notificacion.png" style="width: 58px; height: 58px;">
+      </a>
     </button>
+    
     <button>
-      <a href="/mi-tarjeta" style="text-decoration: none; color: inherit;">
+      <a href="/mi_tarjeta" style="text-decoration: none; color: inherit;">
         <img src="/icons/card.png" style="width: 48px; height: 54px;">
       </a>
     </button>
