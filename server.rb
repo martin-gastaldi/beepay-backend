@@ -185,6 +185,17 @@ class App < Sinatra::Application
         redirect '/welcome'
     end
 
+    get '/mi_tarjeta' do
+        user = User.find_by(id: session[:user_id])
+         return erb :mi_tarjeta, locals: {
+            user_name: user.user_name
+        }
+    end
+
+    get '/museo' do 
+        erb :museo 
+    end
+
     get '/transferir' do
         user = User.find_by(id: session[:user_id])
         if user.nil?

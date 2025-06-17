@@ -1,0 +1,106 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #000;
+  color: #fff;
+}
+
+.container {
+  padding: 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+header {
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+header h1 {
+    color:#ffcf00;
+    font-family: var(--primary-font);
+    font-size: 80px;
+    margin-right: 35rem;
+    margin-top: 15px;
+    text-align: center;
+    
+}
+
+
+/* Primera fila */
+
+.botonVolver {
+    margin-top: -25px;
+    margin-left: 50px;
+    height: 100px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.title {
+  font-size: 32px;
+  color: #FFD700;
+  margin: 0;
+}
+
+.categoria-label {
+  margin: 30px 0 20px;
+  text-align: center;
+}
+
+.categoria-label h2 {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 2px solid #FFD700;
+  border-radius: 10px;
+  font-size: 24px;
+}
+
+.card {
+  background-color: #111;
+  border: 2px solid #FFD700;
+  border-radius: 10px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.card img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  border-bottom: 2px solid #FFD700;
+}
+
+.card p {
+  font-weight: bold;
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #FFD700;
+  color: #000;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-bottom-right-radius: 10px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  grid-row: 2 / 3 ;
+  grid-column: 1 / 3;
+}
+
+.row-top {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  justify-content: center;
+  grid-column: 1 / 3;
+}
+
