@@ -1,3 +1,8 @@
+:root {
+  --primary-color: #ffcf00;
+  --primary-font: "Oswald", sans-serif;
+}
+
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
@@ -12,29 +17,86 @@ body {
 }
 
 header {
-    margin: 0;
-    padding: 0;
-    align-items: center;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 40px;
+  position: relative;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8rem;
 }
+
 header h1 {
-    color:#ffcf00;
-    font-family: var(--primary-font);
-    font-size: 80px;
-    margin-right: 35rem;
-    margin-top: 15px;
-    text-align: center;
-    
+  padding-top: 80px;
+  color: #ffcf00;
+  font-family: var(--primary-font);
+  font-size: 80px;
+  text-align: center;
 }
-
-
-/* Primera fila */
 
 .botonVolver {
-    margin-top: -25px;
-    margin-left: 50px;
-    height: 100px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
+  position: absolute;
+  left: 50px;
+  top: 50%;
+  height: 95px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.botonVolver:hover {
+  background-color: #e6b800;
+  transform: scale(1.05);
+  border-radius: 50%;
+}
+
+.bienvenida {
+  background-color: #ffcf00;
+  color: #000000;
+  font-family: var(--primary-font);
+  font-size: 30px;
+  border-radius: 10px;
+  padding: 10px 20px;
+  width: 85rem;
+  height: 33rem;
+  box-sizing: border-box;
+  margin-top: 20px;
+  margin: 20px auto;
+}
+
+.bienvenida h2 {
+  text-align: center;
+  text-shadow: 0 0 8px #000000;
+}
+
+.bienvenida h3 {
+  text-align: justify;
+}
+
+.contenedorBIM {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 10px;
+}
+
+.botonIntroMuseo {
+  background-color: #000000;
+  color: #ffcf00;
+  font-family: var(--primary-font);
+  font-size: 30px;
+  border-radius: 10px;
+  padding: 10px 20px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+  transition: transform 0.2s ease;
+}
+
+.botonIntroMuseo:hover {
+  background-color: #151515;
+  transform: scale(1.05);
 }
 
 .title {
