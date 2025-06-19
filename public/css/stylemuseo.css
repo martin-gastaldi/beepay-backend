@@ -178,3 +178,38 @@ header h1 {
   background-color: #111111;
   transform: scale(1.05);
 }
+
+.trofeo-container {
+  position: absolute;
+  top: 134;
+  left: 380;
+  background: #FFD700;
+  color: #000;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-bottom-right-radius: 10px;
+  border-radius: 50%;
+}
+
+.trofeo-container img.trofeo {
+  width: 22px;
+  height: 22px;
+}
+
+.trofeo-container-arte{
+  position: absolute;
+  background: #FFD700;
+  color: #000;
+  font-weight: bold;
+  padding: 6px 6px;
+  border-bottom-right-radius: 30px;
+  border-radius: 50%;
+  top: 155px;
+  left: 12px;
+}
+
+.trofeo-container-arte img.trofeo {
+  width: 22px;
+  height: 22px;
+  top: 10px;
+}
