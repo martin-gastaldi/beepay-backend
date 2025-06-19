@@ -295,6 +295,10 @@ class App < Sinatra::Application
         erb :museoDeArte
     end
 
+    get '/museoDeMusica' do
+        erb :museoDeMusica
+    end
+
     get '/notificaciones' do
         user = User.find_by(id: session[:user_id])
         redirect '/login' if user.nil?
