@@ -299,6 +299,86 @@ class App < Sinatra::Application
         erb :museoDeMusica
     end
 
+    get '/depositar' do
+        user = User.find_by(id: session[:user_id])
+        redirect '/login' if user.nil?
+
+        account = user.account
+        if account.nil?
+            return erb :depositar, locals: {
+            error: "No tenés una cuenta asociada.",
+            cuenta_alias: nil,
+            cbu_cvu: nil,
+            nuevo_alias: nil,
+            mensaje: nil
+        }
+        end
+
+        erb :depositar, locals: {
+            error: nil,
+            cuenta_alias: account.alias,
+            cbu_cvu: account.cbu_cvu,
+            nuevo_alias: nil,
+            mensaje: nil
+        }
+    end
+
+    post '/depositar' do
+        user = User.find_by(id: session[:user_id])
+        redirect '/login' if user.nil?
+
+        account = user.account
+        if account.nil?
+            return erb :depositar, locals: {
+            error: "No tenés una cuenta asociada.",
+            cuenta_alias: nil,
+            cbu_cvu: nil,
+            nuevo_alias: nil,
+            mensaje: nil
+            }
+        end
+
+        nuevo_alias = params[:alias].to_s.strip
+
+        if nuevo_alias.empty?
+            return erb :depositar, locals: {
+            error: "El alias no puede estar vacío.",
+            cuenta_alias: account.alias,
+            cbu_cvu: account.cbu_cvu,
+            nuevo_alias: nuevo_alias,
+            mensaje: nil
+            }
+        end
+
+        if Account.exists?(alias: nuevo_alias)
+            return erb :depositar, locals: {
+            error: "Ese alias ya está en uso.",
+            cuenta_alias: account.alias,
+            cbu_cvu: account.cbu_cvu,
+            nuevo_alias: nuevo_alias,
+            mensaje: nil
+            }
+        end
+
+        if account.update(alias: nuevo_alias)
+            return erb :depositar, locals: {
+            mensaje: "✔️ Su alias se modificó con éxito.",
+            cuenta_alias: account.alias,
+            cbu_cvu: account.cbu_cvu,
+            error: nil,
+            nuevo_alias: nil
+            }
+        else
+            return erb :depositar, locals: {
+            error: "No se pudo actualizar el alias.",
+            cuenta_alias: account.alias,
+            cbu_cvu: account.cbu_cvu,
+            nuevo_alias: nuevo_alias,
+            mensaje: nil
+            }
+        end
+    end
+
     get '/notificaciones' do
         user = User.find_by(id: session[:user_id])
         redirect '/login' if user.nil?

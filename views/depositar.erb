@@ -1,0 +1,56 @@
+<head>
+    <title>Depositar dinero</title>
+    <link rel = "stylesheet" href = "/css/styleTransferencia.css">
+</head>
+<body>
+    <header>
+        <a href = "/welcome">
+            <img src = "/icons/botonVolver.png" class = "botonVolver">
+        </a>     
+        <h1>Depositar dinero</h1>
+    </header>
+    <h3 class = "subtitulo">Elegí cómo ingresar dinero</h3>
+    <h4 class = "subtitulo">Tu CBU y alias para transferir desde otra cuenta</h4>
+    <br>
+    <div class = "datos">
+        <p><strong>CBU:</strong><span id = "cbu-text"> <%= cbu_cvu %></span>
+            <button onclick = "copiarAlPortapapeles('cbu-text')" class = "botonCopiar">📋</button>
+        </p>
+    </div>
+    <br>
+    <div class = "datos">
+        <p><strong>ALIAS:</strong><span id = "alias-text"> <%= cuenta_alias %></span>
+            <button onclick = "copiarAlPortapapeles('alias-text')" class = "botonCopiar">📋</button>
+        </p>
+    </div>
+
+    <% if error %>
+    <div class="error"><%= error %></div>
+    <% end %>
+
+    <% if mensaje %>
+    <div class="mensaje-exito"><%= mensaje %></div>
+    <% end %>
+
+    <form action = "/depositar" class = "formularioMotivo" method = "post">
+        <label for = "alias">¿Quiere cambiar su alias? </label>
+        <br>
+        <input type = "text" name = "alias" placeholder = "Ingrese su nuevo alias." required>
+        <br>
+        <button type = "submit" class = "botonFormulario" onclick = "finalizar(event)">Modificar</button>
+    </form>
+
+    <script>
+        function copiarAlPortapapeles(idElemento) {
+        const texto = document.getElementById(idElemento).innerText.trim();
+        navigator.clipboard.writeText(texto)
+            .then(() => {
+            alert("¡Copiado al portapapeles!");
+            })
+            .catch(err => {
+            console.error("Error al copiar: ", err);
+            alert("No se pudo copiar el texto.");
+            });
+        }
+    </script>
+</body>
