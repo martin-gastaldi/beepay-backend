@@ -23,7 +23,9 @@ h1{
 header{
   margin-top: 1rem;
 }
+
 .header-tarjeta{
+  font-family: var(--primary-font);
   margin-right: 529px;
   margin-top: 2rem;
 }
