@@ -196,6 +196,66 @@ class App < Sinatra::Application
         erb :museo 
     end
 
+    get '/personas' do
+    personas = [
+    {
+      nombre: "GastaCuadros",
+      usericon: "/images/logoGastaCuadros.png",
+      instagram: "https://www.instagram.com/gastacuadros?igsh=c3FiODM2amtkbTJ5",
+      facebook: "#",
+      imagenes: ["/images/cuadro1.png", "/images/cuadro2.png", "/images/cuadro3.png", "/images/cuadro5.jpg"],
+      descripcion: "Especialista en calado de madera a mano"
+    },
+    {
+      nombre: "ArteVivo",
+      usericon: "/images/logoart3.jpg",
+      instagram: "https://www.instagram.com/artevivo",
+      facebook: "#",
+      imagenes: ["/images/cuadro6.jpg", "/images/cuadro7.jpg", "/images/cuadro8.jpg", "/images/cuadro9.jpg"],
+      descripcion: "Colores que despiertan espacios y emociones"
+    },
+    {
+      nombre: "CulturaUrbana",
+      usericon: "/images/logoart5.jpg",
+      instagram: "https://www.instagram.com/culturau",
+      facebook: "#",
+      imagenes: ["/images/cuadro10.jpg", "/images/cuadro11.jpg", "/images/cuadro12.jpg", "/images/cuadro13.jpg"],
+      descripcion: "Expresiones urbanas hechas decoración."
+    },
+    {
+      nombre: "GaleriaArte",
+      usericon: "/images/logoart4.jpg",
+      instagram: "https://www.instagram.com/galeriaarte",
+      facebook: "#",
+      imagenes: ["/images/cuadro14.jpg", "/images/cuadro15.jpg", "/images/cuadro16.jpg", "/images/cuadro17.jpg"],
+      descripcion: "Tu rincón con estilo de galería."
+    },
+   
+    ]
+        erb :personas, locals: { personas: personas } 
+    end
+
+    get '/personaInd' do
+    personas = [
+        {
+        nombre: "GastaCuadros",
+        usericon: "/images/logoGastaCuadros.png",
+        instagram: "https://www.instagram.com/gastacuadros",
+        facebook: "#",
+        imagenes: [
+            "/images/cuadro1.png",
+            "/images/cuadro2.png",
+            "/images/cuadro3.png",
+            "/images/cuadro5.jpg"
+        ],
+        descripcion: "Especialista en calado de madera a mano"
+        }
+    ]
+
+    erb :personaInd, locals: { personas: personas }
+    end
+
+
     get '/transferir' do
         user = User.find_by(id: session[:user_id])
         if user.nil?
