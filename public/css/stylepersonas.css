@@ -164,6 +164,11 @@ header{
     font-family: var(--primary-font);
 }
 
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
 
 
 
